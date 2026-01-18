@@ -1,17 +1,8 @@
-/**
-* Template Name: Style
-* Template URL: https://bootstrapmade.com/style-bootstrap-portfolio-template/
-* Updated: Jul 02 2025 with Bootstrap v5.3.7
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
+
 
 @charset "UTF-8";
 
-/*--------------------------------------------------------------
-# Font & Color Variables
-# Help: https://bootstrapmade.com/color-system/
---------------------------------------------------------------*/
+
 /* Fonts */
 :root {
   --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -22,9 +13,9 @@
 /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
 :root { 
   --background-color: #ffffff; /* Background color for the entire website, including individual sections */
-  --default-color: #314862; /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #13447f; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #065cc2; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+  --default-color: #000000; /* Default color used for the majority of the text content across the entire website */
+  --heading-color: #c59f24; /* Color for headings, subheadings and title throughout the website */
+  --accent-color: #0063c6; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
   --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
   --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
 }
@@ -66,7 +57,11 @@
 body {
   color: var(--default-color);
   background-color: var(--background-color);
-  font-family: var(--default-font);
+  /* font-family: "Baskerville Old Face", serif; */
+  font-family: "Felix titling ", serif
+;
+font-weight: 400;
+  font-size: 18px;
 }
 
 a {
@@ -87,7 +82,10 @@ h4,
 h5,
 h6 {
   color: var(--heading-color);
-  font-family: var(--heading-font);
+  font-family: "Arial(Bold)", sans-serif;
+  font-weight: 700;
+  margin: 0 0 15px 0;
+  line-height: 1.2;
 }
 
 /* PHP Email Form Messages
@@ -535,7 +533,7 @@ section,
   left: 0;
   right: 0;
   bottom: 0;
-  background: url("../img/bg/abstract-bg-1.webp") no-repeat center center;
+  background: url("../img/bg/worldtechguy.jfif") no-repeat center center;
   background-size: cover;
   opacity: 0.08;
   z-index: 1;
@@ -564,7 +562,7 @@ section,
 }
 
 .hero .hero-title {
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: 700;
   margin-bottom: 1.5rem;
   line-height: 1.2;
@@ -583,6 +581,10 @@ section,
 }
 
 .hero .hero-title .typed {
+  color: var(--accent-color);
+  position: relative;
+}
+.hero .hero-title span {
   color: var(--accent-color);
   position: relative;
 }
@@ -3211,16 +3213,30 @@ Services Section
   z-index: 1;
 }
 
-.parallax-content h2 {
-  font-size: 2.8rem;
+.parallax-content h3 {
+  font-size: 2rem;
+  color: var(--background-color);
+  font-family: "Arial(Bold)", serif; 
   margin-bottom: 20px;
   font-weight: 700;
 }
 
-.parallax-content p {
-  font-size: 1.15rem;
-  line-height: 1.7;
-  opacity: 0.95;
+.parallax-content a {
+  padding: 12px 30px;
+  font-weight: 600;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.parallax-content a {
+  background-color: var(--accent-color);
+  color: var(--contrast-color);
+  border: 2px solid var(--accent-color);
+}
+.parallax-content a:hover {
+  background-color: var(--contrast-color);
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
 }
 
 /* Mobile – désactiver le fixed pour performance */
@@ -3396,3 +3412,65 @@ Services Section
     font-size: 14px;
   }
 }
+
+
+#how-it-works {
+  background-color: #f8f9fa;
+  overflow: hidden;
+  position: relative;
+  font-family: "Arial Bold", sans-serif;
+ 
+}
+
+/* Lignes de la grille */
+.container {
+  position: relative;
+}
+
+/* Bordures personnalisées pour simuler le design */
+@media (min-width: 992px) {
+  .border-start-lg { border-left: 1px solid #dee2e6; }
+  .border-top-lg { border-top: 1px solid #dee2e6; }
+}
+
+/* Petit tiret sous le numéro du Stage */
+.red-dash {
+  width: 40px;
+  height: 2px;
+  background-color: var(--accent-color); /* Ou une couleur spécifique du design */
+  margin-bottom: 15px;
+}
+
+/* Bouton Cercle "Read More" */
+.read-more-circle {
+ 
+  padding: 15px;
+  border: 1px solid #dee2e6;
+  border-radius:30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.read-more-circle:hover {
+  background-color: var(--accent-color);
+  color: white;
+  transform: scale(1.1);
+}
+
+.stage-item h3 {
+  color: #000;
+}
+
+.stage-item p {
+  line-height: 1.6;
+  font-family: "Baskerville Old Face ", sans-serif;
+}
+
+

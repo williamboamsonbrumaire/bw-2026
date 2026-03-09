@@ -497,6 +497,19 @@ section,
   position: relative;
 }
 
+@media (max-width: 576px) {
+  .section-title h2 {
+  font-size: 18px;
+  font-weight: 700;
+  padding: 0;
+  line-height: 1px;
+  margin: 0;
+  letter-spacing: 0.5px;
+  position: relative;
+}
+
+}
+
 .section-title h2::after {
   content: "";
   width: 120px;
@@ -3185,7 +3198,7 @@ Services Section
 .parallax-section {
   position: relative;
   height: 100vh;
-  background-image: url("../img/bg/dev\ \(1\).jpg"); /* remplace par ton image */
+  background-image: url("../img/bg/0U0A2212.jpg"); /* remplace par ton image */
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -3246,12 +3259,10 @@ Services Section
     height: 70vh;
   }
 
-  .parallax-content h2 {
-    font-size: 2rem;
+  .parallax-content h3 {
+    font-size: 1.5rem;
   }
 }
-
-/* Process */
 
 /* ================================
    PROCESS SECTION

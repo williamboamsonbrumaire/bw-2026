@@ -28,7 +28,8 @@
 }
 
     *, *::before, *::after { box-sizing: border-box; }
-    body { color: var(--default-color); background-color: var(--background-color); font-family: var(--default-font); font-size: 17px; font-weight: 400; line-height: 1.7; }
+    body { 
+      color: var(--default-color); background-color: var(--background-color); font-family: var(--default-font); font-size: 17px; font-weight: 400; line-height: 1.7; }
     h1,h2,h3,h4,h5,h6 { color: var(--heading-color); font-family: var(--heading-font); font-weight: 700; margin: 0 0 15px 0; line-height: 1.2; }
     a { color: var(--accent-color); text-decoration: none; transition: .3s; }
     a:hover { color: color-mix(in srgb, var(--accent-color), transparent 25%); }
@@ -99,7 +100,7 @@ body.mobile-nav-active .nav-overlay { display: block; }
 
 
     /* HERO */
-    .article-hero { position: relative; background: linear-gradient(0deg, #04213e 10%, #0063c6 55%); padding: 90px 0 70px; overflow: hidden; }
+    .article-hero { position: relative; background: linear-gradient(0deg, #0063c6 10%, #0063c6 5%); padding: 90px 0 70px; overflow: hidden; }
     .article-hero::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 15% 60%, rgba(0,99,198,.22) 0%, transparent 55%), radial-gradient(ellipse at 85% 15%, rgba(197,159,36,.12) 0%, transparent 50%); }
     .article-hero::after { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(0,99,198,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,99,198,.05) 1px, transparent 1px); background-size: 48px 48px; }
     .article-hero .container { position: relative; z-index: 2; }
@@ -198,7 +199,7 @@ body.mobile-nav-active .nav-overlay { display: block; }
     .partner-chip:hover { background: var(--accent-color); color: #fff; }
 
     /* CONTACT CARD */
-    .contact-info-card { background: linear-gradient(135deg, #001a3a 0%, var(--accent-color) 100%); border-radius: 20px; padding: 38px; color: #fff; position: relative; overflow: hidden; }
+    .contact-info-card { background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-color) 100%); border-radius: 20px; padding: 38px; color: #fff; position: relative; overflow: hidden; }
     .contact-info-card::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(circle at 20% 30%, rgba(197,159,36,.12) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(255,255,255,.04) 0%, transparent 50%); }
     .contact-info-card .inner { position: relative; }
     .contact-info-card h3 { color: #fff; font-size: 1.45rem; margin-bottom: 6px; }
@@ -212,7 +213,7 @@ body.mobile-nav-active .nav-overlay { display: block; }
 
     /* PULL QUOTE */
     .pull-quote { border-left: 4px solid var(--heading-color); padding: 18px 22px; margin: 32px 0; background: color-mix(in srgb, var(--heading-color), transparent 95%); border-radius: 0 12px 12px 0; }
-    .pull-quote p { font-size: 1.05rem; font-style: italic; font-weight: 500; color: color-mix(in srgb, var(--default-color), transparent 10%); margin: 0; }
+    .pull-quote p { font-size: 1.5rem; font-style: italic; font-weight: 500; color: color-mix(in srgb, var(--default-color), transparent 10%); margin: 0; }
 
     /* TOC SIDEBAR */
     .toc-box { position: sticky; top: 24px; background: var(--surface-color); border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%); border-radius: 14px; padding: 22px; }
@@ -227,7 +228,7 @@ body.mobile-nav-active .nav-overlay { display: block; }
     .km-row:last-child { border-bottom: none; }
     .km-l { color: color-mix(in srgb, var(--default-color), transparent 35%); }
     .km-v { font-weight: 700; color: var(--accent-color); }
-    .slogan-box { margin-top: 14px; padding: 14px; background: linear-gradient(135deg, #001a3a, var(--accent-color)); border-radius: 12px; text-align: center; }
+    .slogan-box { margin-top: 14px; padding: 14px; background: linear-gradient(135deg, var(--accent-color), var(--accent-color)); border-radius: 12px; text-align: center; }
     .slogan-box p { color: #fff; font-size: .83rem; font-style: italic; margin: 0; line-height: 1.6; }
 
     @media (max-width: 768px) { .article-hero { padding: 60px 0 50px; } .contact-info-card { padding: 24px 18px; } }

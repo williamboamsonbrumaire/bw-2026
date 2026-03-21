@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DevExpo — Mon Parcours | William Boamson Brumaire</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Open+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
+
+  <style>
+    /* ══════════════════════════════════
+       VARIABLES — palette exacte du site
+    ══════════════════════════════════ */
+    :root {
+      --bg:        #ffffff;
+      --bg-soft:   #f7faff;
+      --default:   #0f172a;
+      --muted:     #64748b;
+      --gold:      #c59f24;
+      --blue:      #0063c6;
+      --blue-dark: #003d8a;
+      --surface:   #ffffff;
+      --border:    #e2e8f0;
+
+      --font-head: 'Quicksand', sans-serif;
+      --font-body: 'Open Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--default);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    h1,h2,h3,h4,h5,h6 {
+      font-family: var(--font-head);
+      font-weight: 700;
+      color: var(--default);
+      line-height: 1.2;
+      margin: 0 0 14px;
+    }
+
+    a { color: var(--blue); text-decoration: none; transition: .25s; }
+    a:hover { color: color-mix(in srgb, var(--blue), transparent 25%); }
+    p { color: var(--muted); margin-bottom: 1rem; }
+
+    /* ══════════════════════════════════
+       HEADER / NAV
+    ══════════════════════════════════ */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow .3s ease;
+    }
+
+    .site-header.scrolled {
+      box-shadow: 0 4px 24px rgba(0,99,198,.08);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+    }
+
+    /* Logo — BW mark comme sur le screenshot */
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-mark {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-head);
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -.5px;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .logo-text .lt-name {
+      font-family: var(--font-head);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--default);
+    }
+
+    .logo-text .lt-name span { color: var(--gold); }
+
+    .logo-text .lt-role {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    /* Nav links */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+      margin: 0; padding: 0;
+    }
+
+    .nav-links li a {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      padding: 7px 14px;
+      border-radius: 8px;
+      transition: all .2s ease;
+      text-decoration: none;
+    }
+
+    .nav-links li a:hover { color: var(--blue); background: rgba(0,99,198,.06); }
+    .nav-links li a.active { color: var(--blue); }
+
+    /* Nav CTA button */
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--blue);
+      color: #fff !important;
+      padding: 8px 18px !important;
+      border-radius: 50px !important;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all .3s ease !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--blue-dark) !important;
+      color: #fff !important;
+    }
+
+    /* Mobile toggle */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      cursor: pointer;
+      color: var(--default);
+      font-size: 18px;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; align-items: center; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 68px; left: 0; right: 0;
+        background: #fff;
+        border-bottom: 1px solid var(--border);
+        padding: 12px 20px 20px;
+        gap: 2px;
+        box-shadow: 0 8px 24px rgba(0,0,0,.08);
+      }
+      .nav-links.open li { width: 100%; }
+      .nav-links.open li a { display: block; }
+    }
+
+    /* ══════════════════════════════════
+       HERO
+    ══════════════════════════════════ */
+    .hero {
+      padding: 130px 0 80px;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Dot pattern */
+    .hero::before {
+      content: "";
+      position: absolute; inset: 0;
+      background-image: radial-gradient(var(--border) 1px, transparent 1px);
+      background-size: 28px 28px;
+      opacity: .55;
+      z-index: 0;
+    }
+
+    /* Blue left accent bar */
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: linear-gradient(to bottom, var(--blue), var(--gold));
+    }
+
+    .hero .container { position: relative; z-index: 1; }
+
+    /* Eyebrow — site exact style */
+    .eyebrow {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+    }
+    .eyebrow .line { width: 40px; height: 1px; background: var(--blue); }
+    .eyebrow span {
+      font-size: 12px; font-weight: 600;
+      letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      color: var(--default); margin-bottom: 8px; line-height: 1.05;
+    }
+    .hero h1 .gold { color: var(--gold); }
+
+    .hero-sub {
+      font-size: 13px; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--muted);
+      font-weight: 500; margin-bottom: 28px;
+    }
+
+    /* Quote — signature */
+    .hero-quote {
+      border-left: 3px solid var(--gold);
+      background: #fefce8;
+      padding: 14px 20px; margin-bottom: 32px;
+      max-width: 560px; border-radius: 0 6px 6px 0;
+    }
+    .hero-quote p { font-style: italic; color: var(--default); margin: 0; font-size: .97rem; }
+
+    /* Badges */
+    .hero-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 32px; }
+    .hbadge {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 18px; border-radius: 50px;
+      font-size: 13px; font-weight: 600; border: 1.5px solid;
+    }
+    .hbadge.blue { border-color: var(--blue);  color: var(--blue);  background: rgba(0,99,198,.06); }
+    .hbadge.gold { border-color: var(--gold);  color: #9a7a10;      background: rgba(197,159,36,.08); }
+    .hbadge.dark { border-color: var(--border); color: var(--muted); background: var(--bg-soft); }
+
+    /* Buttons */
+    .btn-blue {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--blue); color: #fff;
+      padding: 13px 28px; border-radius: 50px;
+      font-weight: 600; font-size: 14px;
+      border: 2px solid var(--blue);
+      transition: all .3s ease; text-decoration: none;
+    }
+    .btn-blue:hover { background: transparent; color: var(--blue); }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--default);
+      padding: 13px 28px; border-radius: 50px;
+      font-weight: 600; font-size: 14px;
+      border: 2px solid var(--border);
+      transition: all .3s ease; text-decoration: none;
+    }
+    .btn-ghost:hover { border-color: var(--blue); color: var(--blue); }
+
+    /* ══════════════════════════════════
+       SCROLL REVEAL
+    ══════════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.from-left  { transform: translateX(-50px); }
+    .reveal.from-right { transform: translateX(50px); }
+    .reveal.visible {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
+
+    /* ══════════════════════════════════
+       CHAPTER DIVIDER
+    ══════════════════════════════════ */
+    .chapter-divider {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 56px 0 48px;
+    }
+
+    .chapter-divider .ch-line { flex: 1; height: 1px; background: var(--border); }
+
+    .chapter-divider .ch-label {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 8px 20px;
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--default);
+      white-space: nowrap;
+    }
+
+    .chapter-divider .ch-label .ch-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+    }
+
+    /* ══════════════════════════════════
+       STORY BLOCKS — alternating L/R
+    ══════════════════════════════════ */
+    .story-block {
+      padding: 72px 0;
+    }
+
+    .story-block.soft { background: var(--bg-soft); }
+
+    .story-block .sb-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .story-block .sb-inner.reverse { direction: rtl; }
+    .story-block .sb-inner.reverse > * { direction: ltr; }
+
+    @media (max-width: 991px) {
+      .story-block .sb-inner,
+      .story-block .sb-inner.reverse { grid-template-columns: 1fr; direction: ltr; gap: 36px; }
+    }
+
+    /* Text side */
+    .sb-text {}
+
+    .sb-chapter-tag {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px;
+      color: var(--blue); margin-bottom: 10px;
+    }
+    .sb-chapter-tag::before { content: ""; width: 20px; height: 2px; background: var(--blue); }
+
+    .sb-text h2 {
+      font-size: clamp(1.5rem, 2.5vw, 2rem);
+      color: var(--default); margin-bottom: 8px;
+    }
+
+    .sb-rule {
+      width: 44px; height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--gold));
+      border-radius: 2px; margin-bottom: 20px;
+    }
+
+    .sb-text p { font-size: .93rem; color: var(--muted); margin-bottom: 14px; }
+
+    /* Highlight inline */
+    .sb-text strong.hl-blue { color: var(--blue); }
+    .sb-text strong.hl-gold { color: var(--gold); }
+    .sb-text strong.hl-dark { color: var(--default); }
+
+    /* Quote style */
+    .sb-quote {
+      border-left: 3px solid var(--gold);
+      background: #fefce8;
+      padding: 14px 18px; margin: 18px 0;
+      border-radius: 0 8px 8px 0;
+    }
+    .sb-quote p { font-style: italic; color: var(--default); font-size: .93rem; margin: 0; }
+
+    /* Stat row */
+    .sb-stats { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+    .sb-stat {
+      display: flex; flex-direction: column; align-items: center;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 12px 18px; text-align: center; min-width: 80px;
+    }
+    .sb-stat .n { font-family: var(--font-head); font-size: 1.5rem; font-weight: 700; line-height: 1; }
+    .sb-stat .n.blue { color: var(--blue); }
+    .sb-stat .n.gold { color: var(--gold); }
+    .sb-stat .l { font-size: 10px; color: var(--muted); margin-top: 3px; }
+
+    /* Highlight box */
+    .sb-hl {
+      background: rgba(0,99,198,.04);
+      border: 1px solid rgba(0,99,198,.12);
+      border-radius: 10px; padding: 14px 18px; margin-top: 16px;
+    }
+    .sb-hl p { font-size: .86rem; color: var(--muted); margin: 0; }
+    .sb-hl strong { color: var(--blue); }
+
+    /* People tags */
+    .people-wrap { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+    .ptag {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--bg-soft); border: 1px solid var(--border);
+      border-radius: 6px; padding: 4px 10px;
+      font-size: 11px; color: var(--muted);
+      transition: all .2s ease;
+    }
+    .ptag:hover { border-color: var(--blue); color: var(--blue); }
+    .ptag i { font-size: 11px; }
+
+    /* Visual side */
+    .sb-visual {}
+
+    /* Photo slot */
+    .photo-slot {
+      position: relative; border-radius: 16px; overflow: hidden;
+      background: var(--bg-soft);
+      border: 2px dashed color-mix(in srgb, var(--blue), transparent 65%);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 32px 20px;
+      transition: all .3s ease; cursor: pointer;
+    }
+    .photo-slot:hover { border-color: var(--blue); background: rgba(0,99,198,.03); }
+    .photo-slot.ratio-4-3  { aspect-ratio: 4/3; }
+    .photo-slot.ratio-3-4  { aspect-ratio: 3/4; }
+    .photo-slot.ratio-16-9 { aspect-ratio: 16/9; }
+    .photo-slot.ratio-1-1  { aspect-ratio: 1/1; }
+    .photo-slot .ps-icon {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: rgba(0,99,198,.1);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 12px;
+    }
+    .photo-slot .ps-icon i { color: var(--blue); font-size: 22px; }
+    .photo-slot .ps-label { font-size: 13px; font-weight: 600; color: var(--blue); margin-bottom: 4px; }
+    .photo-slot .ps-hint { font-size: 11px; color: var(--muted); font-family: var(--font-mono); line-height: 1.5; }
+    .photo-slot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .photo-caption { font-size: 12px; color: var(--muted); text-align: center; margin-top: 8px; font-style: italic; }
+
+    /* Visual card overlay — floating stat */
+    .visual-wrap { position: relative; }
+
+    .float-badge {
+      position: absolute;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 16px;
+      box-shadow: 0 8px 24px rgba(0,99,198,.1);
+      display: flex; align-items: center; gap: 10px;
+      z-index: 2;
+    }
+
+    .float-badge.fb-tl { top: -16px; left: -16px; }
+    .float-badge.fb-br { bottom: -16px; right: -16px; }
+
+    .float-badge .fb-icon {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .float-badge.blue .fb-icon { background: rgba(0,99,198,.1); }
+    .float-badge.gold .fb-icon { background: rgba(197,159,36,.1); }
+    .float-badge.blue .fb-icon i { color: var(--blue); font-size: 16px; }
+    .float-badge.gold .fb-icon i { color: var(--gold); font-size: 16px; }
+    .float-badge .fb-text .fb-val { font-size: .88rem; font-weight: 700; color: var(--default); line-height: 1.2; }
+    .float-badge .fb-text .fb-sub { font-size: 10px; color: var(--muted); }
+
+    @media (max-width: 576px) {
+      .float-badge { display: none; }
+    }
+
+    /* ══════════════════════════════════
+       LESSONS GRID
+    ══════════════════════════════════ */
+    .lesson-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 26px; height: 100%;
+      position: relative; overflow: hidden;
+      transition: all .3s ease;
+    }
+    .lesson-card::before {
+      content: ""; position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+    }
+    .lesson-card.lc-blue::before  { background: linear-gradient(90deg, var(--blue), transparent); }
+    .lesson-card.lc-gold::before  { background: linear-gradient(90deg, var(--gold), transparent); }
+    .lesson-card.lc-teal::before  { background: linear-gradient(90deg, #0891b2, transparent); }
+    .lesson-card.lc-slate::before { background: linear-gradient(90deg, var(--default), transparent); }
+    .lesson-card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(0,99,198,.08); }
+    .lesson-card .lc-num { position: absolute; top: 12px; right: 16px; font-size: 3.2rem; font-weight: 900; color: var(--border); font-family: var(--font-head); line-height: 1; }
+    .lesson-card .lc-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 14px; }
+    .lesson-card.lc-blue  .lc-icon { background: rgba(0,99,198,.08); }
+    .lesson-card.lc-gold  .lc-icon { background: rgba(197,159,36,.08); }
+    .lesson-card.lc-teal  .lc-icon { background: rgba(8,145,178,.08); }
+    .lesson-card.lc-slate .lc-icon { background: rgba(15,23,42,.06); }
+    .lesson-card.lc-blue  .lc-icon i { color: var(--blue); font-size: 20px; }
+    .lesson-card.lc-gold  .lc-icon i { color: var(--gold); font-size: 20px; }
+    .lesson-card.lc-teal  .lc-icon i { color: #0891b2; font-size: 20px; }
+    .lesson-card.lc-slate .lc-icon i { color: var(--default); font-size: 20px; }
+    .lesson-card h4 { font-size: .97rem; color: var(--default); margin-bottom: 8px; }
+    .lesson-card p  { font-size: .84rem; color: var(--muted); margin: 0; line-height: 1.65; }
+
+    /* ══════════════════════════════════
+       CTA SECTION
+    ══════════════════════════════════ */
+    .cta-section {
+      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 100%);
+      padding: 88px 0; position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ""; position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .cta-section .container { position: relative; z-index: 1; }
+    .cta-section h2 { color: #fff; font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 16px; }
+    .cta-section h2 span { color: var(--gold); }
+
+    .req-block {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px; padding: 28px;
+    }
+    .req-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .req-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .req-num {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-head); font-size: 14px; font-weight: 700;
+      flex-shrink: 0;
+    }
+    .req-num.gold { background: var(--gold); color: #fff; }
+    .req-num.dim  { background: rgba(255,255,255,.12); color: #fff; }
+    .req-num.dimmer { background: rgba(255,255,255,.06); color: rgba(255,255,255,.6); }
+    .req-item h5 { font-size: .95rem; color: #fff; margin-bottom: 3px; }
+    .req-item p  { font-size: .83rem; color: rgba(255,255,255,.6); margin: 0; }
+
+    /* Hashtags */
+    .tags-row { display: flex; flex-wrap: wrap; gap: 6px; padding: 40px 0 10px; }
+    .htag {
+      font-family: var(--font-mono); font-size: 11px;
+      color: var(--muted); padding: 4px 10px;
+      background: var(--bg-soft); border-radius: 4px;
+      border: 1px solid var(--border); transition: all .2s ease;
+    }
+    .htag:hover { color: var(--blue); border-color: rgba(0,99,198,.25); }
+
+    /* ══════════════════════════════════
+       FOOTER STRIP
+    ══════════════════════════════════ */
+    .site-footer {
+      background: var(--bg-soft);
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+    }
+    .site-footer .ft-inner {
+      display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .site-footer .ft-copy { font-size: 12px; color: var(--muted); }
+    .site-footer .ft-links { display: flex; gap: 16px; }
+    .site-footer .ft-links a { font-size: 12px; color: var(--muted); }
+    .site-footer .ft-links a:hover { color: var(--blue); }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     HEADER
+══════════════════════════════════ -->
+<header class="site-header" id="site-header">
+  <div class="container">
+    <div class="header-inner">
+
+      <!-- Logo -->
+      <a href="#" class="logo-wrap">
+        <div class="logo-mark">BW</div>
+        <div class="logo-text">
+          <span class="lt-name">William <span>Boamson</span></span>
+          <span class="lt-role">Computer Engineer · IT Manager</span>
+        </div>
+      </a>
+
+      <!-- Nav desktop -->
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#story">Parcours</a></li>
+        <li><a href="#lessons">Leçons</a></li>
+        <li><a href="#cta" class="nav-cta"><i class="bi bi-arrow-right-circle-fill"></i> Rejoindre DevExpo</a></li>
+      </ul>
+
+      <!-- Mobile toggle -->
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+        <i class="bi bi-list"></i>
+      </button>
+
+    </div>
+  </div>
+</header>
+
+
+<!-- ══════════════════════════════════
+     HERO
+══════════════════════════════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="row align-items-center g-5">
+
+      <div class="col-lg-7">
+        <div class="eyebrow reveal">
+          <div class="line"></div>
+          <span>Software Engineer · Lead Developer · Speaker</span>
+          <div class="line"></div>
+        </div>
+
+        <h1 class="reveal" style="transition-delay:.1s">
+          DevExpo —<br>
+          <span class="gold">Mon Parcours</span>
+        </h1>
+
+        <p class="hero-sub reveal" style="transition-delay:.15s">
+          William Boamson Brumaire &nbsp;·&nbsp; JwennJob &nbsp;·&nbsp; HubConnect HT
+        </p>
+
+        <div class="hero-quote reveal" style="transition-delay:.2s">
+          <p>« Peu importe le résultat, l'expérience vous transformera. »</p>
+        </div>
+
+        <div class="hero-badges reveal" style="transition-delay:.25s">
+          <span class="hbadge blue"><i class="bi bi-trophy"></i> 3ème / 5 finalistes · 2024</span>
+          <span class="hbadge gold"><i class="bi bi-mic"></i> Co-modérateur · 2025</span>
+          <span class="hbadge dark"><i class="bi bi-people"></i> 40+ startups animées</span>
+        </div>
+
+        <div class="d-flex flex-wrap gap-3 reveal" style="transition-delay:.3s">
+          <a href="#story" class="btn-blue"><i class="bi bi-arrow-down"></i> Lire l'histoire</a>
+          <a href="#cta"   class="btn-ghost"><i class="bi bi-terminal"></i> Rejoindre DevExpo</a>
+        </div>
+      </div>
+
+      <!-- Right — progression visuelle -->
+      <div class="col-lg-5 reveal from-right" style="transition-delay:.2s">
+        <div style="background:var(--bg-soft); border:1px solid var(--border); border-radius:20px; padding:28px;">
+          <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--blue); margin-bottom:18px; display:flex; align-items:center; gap:8px;">
+            <span style="width:16px;height:2px;background:var(--blue);display:inline-block;"></span>
+            Évolution DevExpo
+          </div>
+          <!-- 2024 -->
+          <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px; border-left:3px solid var(--blue); margin-bottom:12px;">
+            <div style="font-size:11px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:1px; margin-bottom:5px;">2024 · Concurrent</div>
+            <div style="font-weight:700; font-size:.95rem; color:var(--default);">JwennJob</div>
+            <div style="font-size:12px; color:var(--muted); margin-top:2px;">3ème finaliste · Investisseur capté</div>
+          </div>
+          <!-- arrow -->
+          <div style="display:flex; justify-content:center; margin:4px 0;">
+            <div style="display:flex; flex-direction:column; align-items:center; gap:2px;">
+              <div style="width:2px; height:20px; background:linear-gradient(to bottom, var(--blue), var(--gold));"></div>
+              <i class="bi bi-chevron-down" style="font-size:12px; color:var(--gold);"></i>
+            </div>
+          </div>
+          <!-- 2025 -->
+          <div style="background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:16px; border-left:3px solid var(--gold);">
+            <div style="font-size:11px; font-weight:700; color:#9a7a10; text-transform:uppercase; letter-spacing:1px; margin-bottom:5px;">2025 · Co-Modérateur</div>
+            <div style="font-weight:700; font-size:.95rem; color:var(--default);">HubConnect HT</div>
+            <div style="font-size:12px; color:var(--muted); margin-top:2px;">Innovation Hybrid Expo · 40+ startups</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     STORY — narration progressive
+══════════════════════════════════ -->
+<div id="story">
+
+  <!-- ── CHAPITRE 1 ── -->
+  <div class="container">
+    <div class="chapter-divider reveal">
+      <div class="ch-line"></div>
+      <div class="ch-label">
+        <div class="ch-dot" style="background:var(--blue);"></div>
+        Chapitre 1 · Décembre 2024
+      </div>
+      <div class="ch-line"></div>
+    </div>
+  </div>
+
+  <!-- Block 1 — Texte gauche / Photo droite -->
+  <section class="story-block">
+    <div class="container">
+      <div class="sb-inner">
+
+        <div class="sb-text reveal from-left">
+          <div class="sb-chapter-tag">Le point de départ</div>
+          <h2>Trois développeurs, une idée, une scène.</h2>
+          <div class="sb-rule"></div>
+          <p>Décembre 2024. Avec mes coéquipiers <strong class="hl-dark">Guillaume Kingsley</strong> et <strong class="hl-dark">Wood Smith BRINVIL</strong>, nous nous présentons à la DevExpo comme une startup parmi d'autres — mais avec une conviction claire : <strong class="hl-blue">JwennJob répond à un besoin réel</strong>.</p>
+          <p>Nous avons pitché devant des investisseurs. L'enjeu était simple : convaincre en quelques minutes que notre solution valait le détour.</p>
+          <div class="sb-stats">
+            <div class="sb-stat"><span class="n blue">3</span><span class="l">Dans l'équipe</span></div>
+            <div class="sb-stat"><span class="n blue">5</span><span class="l">Finalistes</span></div>
+            <div class="sb-stat"><span class="n gold">1</span><span class="l">Partenaire capté</span></div>
+          </div>
+        </div>
+
+        <div class="sb-visual reveal from-right">
+          <div class="visual-wrap">
+            <div class="float-badge fb-tl blue">
+              <div class="fb-icon"><i class="bi bi-people-fill"></i></div>
+              <div class="fb-text">
+                <div class="fb-val">Équipe de 3</div>
+                <div class="fb-sub">Guillaume · Wood Smith · Brumaire</div>
+              </div>
+            </div>
+            <div class="photo-slot ratio-4-3">
+              <div class="ps-icon"><i class="bi bi-camera"></i></div>
+              <div class="ps-label">Photo — Le pitch JwennJob</div>
+              <div class="ps-hint">Sur scène · DevExpo 2024<br><code>photos/pitch-2024.jpg</code></div>
+            </div>
+            <p class="photo-caption">Le pitch JwennJob devant les investisseurs · DevExpo 2024</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Block 2 — Photo gauche / Texte droite -->
+  <section class="story-block soft">
+    <div class="container">
+      <div class="sb-inner reverse">
+
+        <div class="sb-text reveal from-right">
+          <div class="sb-chapter-tag">Le résultat</div>
+          <h2>3ème place. Et bien plus que ça.</h2>
+          <div class="sb-rule"></div>
+          <p>Nous avons terminé <strong class="hl-blue">3ème parmi les 5 finalistes</strong>. Mais le vrai trophée n'est pas dans le classement — c'est le <strong class="hl-gold">partenaire stratégique potentiel</strong> dont l'attention nous avons captée lors du pitch.</p>
+          <div class="sb-quote">
+            <p>« Un produit qui résout un problème réel + un modèle d'affaires solide = une startup qui survit et impacte. »</p>
+          </div>
+          <p style="font-size:.88rem;">Merci à <strong class="hl-dark">Marc Alain Boucicault</strong> pour ses critiques constructives qui nous ont poussés à aller au-delà des idées classiques — et à <strong class="hl-dark">Juste-Coeur BEAUBRUN</strong>, dont l'énergie comme MC a rendu l'événement inoubliable.</p>
+        </div>
+
+        <div class="sb-visual reveal from-left">
+          <div class="visual-wrap">
+            <div class="float-badge fb-br gold">
+              <div class="fb-icon"><i class="bi bi-trophy-fill"></i></div>
+              <div class="fb-text">
+                <div class="fb-val">3ème / 5 finalistes</div>
+                <div class="fb-sub">DevExpo 2024</div>
+              </div>
+            </div>
+            <div class="photo-slot ratio-4-3">
+              <div class="ps-icon"><i class="bi bi-camera"></i></div>
+              <div class="ps-label">Photo — L'équipe sur scène</div>
+              <div class="ps-hint">Podium ou moment de remise<br><code>photos/equipe-podium.jpg</code></div>
+            </div>
+            <p class="photo-caption">Guillaume · Wood Smith · Brumaire — DevExpo 2024</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CHAPITRE 2 ── -->
+  <div class="container">
+    <div class="chapter-divider reveal">
+      <div class="ch-line"></div>
+      <div class="ch-label">
+        <div class="ch-dot" style="background:var(--gold);"></div>
+        Chapitre 2 · 2025
+      </div>
+      <div class="ch-line"></div>
+    </div>
+  </div>
+
+  <!-- Block 3 — Texte gauche / Photo droite -->
+  <section class="story-block">
+    <div class="container">
+      <div class="sb-inner">
+
+        <div class="sb-text reveal from-left">
+          <div class="sb-chapter-tag" style="color:var(--gold);">
+            <span style="display:inline-block; width:20px; height:2px; background:var(--gold); vertical-align:middle; margin-right:8px;"></span>
+            Un nouveau rôle
+          </div>
+          <h2>De l'autre côté de la scène.</h2>
+          <div class="sb-rule"></div>
+          <p>En décembre 2024, je participais. Un an plus tard, j'ai rejoint l'équipe organisatrice et co-modéré la session <strong class="hl-dark">Innovation Hybrid Expo</strong> aux côtés de <strong class="hl-dark">John Sterlin Duverseau</strong>.</p>
+          <p>Cette session a mis en lumière <strong class="hl-blue">plus de 40 startups et entreprises</strong> porteuses d'innovations concrètes — avec un impact réel sur la société haïtienne.</p>
+          <div class="sb-stats">
+            <div class="sb-stat"><span class="n gold">40+</span><span class="l">Startups</span></div>
+            <div class="sb-stat"><span class="n gold">🏆</span><span class="l">Idantifye</span></div>
+            <div class="sb-stat"><span class="n blue">1</span><span class="l">Prix du Public</span></div>
+          </div>
+          <p style="font-size:.88rem; margin-top:4px;">Parmi les exposants, <strong class="hl-gold">Idantifye</strong> s'est démarquée et a remporté le Prix du Public — un moment fort de l'événement.</p>
+        </div>
+
+        <div class="sb-visual reveal from-right">
+          <div class="visual-wrap">
+            <div class="float-badge fb-tl gold">
+              <div class="fb-icon"><i class="bi bi-mic-fill"></i></div>
+              <div class="fb-text">
+                <div class="fb-val">Co-modérateur</div>
+                <div class="fb-sub">Innovation Hybrid Expo 2025</div>
+              </div>
+            </div>
+            <div class="photo-slot ratio-4-3">
+              <div class="ps-icon"><i class="bi bi-camera"></i></div>
+              <div class="ps-label">Photo — Modération sur scène</div>
+              <div class="ps-hint">Avec John Sterlin Duverseau<br><code>photos/moderation-2025.jpg</code></div>
+            </div>
+            <p class="photo-caption">Co-modération · Innovation Hybrid Expo 2025</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Block 4 — Photo gauche / Texte droite -->
+  <section class="story-block soft">
+    <div class="container">
+      <div class="sb-inner reverse">
+
+        <div class="sb-text reveal from-right">
+          <div class="sb-chapter-tag" style="color:var(--gold);">
+            <span style="display:inline-block; width:20px; height:2px; background:var(--gold); vertical-align:middle; margin-right:8px;"></span>
+            Le nouveau projet
+          </div>
+          <h2>HubConnect HT — Former, élever, transformer.</h2>
+          <div class="sb-rule"></div>
+          <p>Mon équipe <strong class="hl-dark">HubConnect HT</strong> était parmi les exposants 2025. Nous avons présenté notre vision : un accès élargi à la formation numérique en Haïti via notre application web.</p>
+          <div class="sb-hl">
+            <p><strong>Mission :</strong> donner à chaque jeune haïtien l'opportunité de <strong>se former, s'élever et contribuer</strong> à la transformation numérique du pays. 🔥</p>
+          </div>
+          <p style="font-size:.88rem; margin-top:14px;">DevExpo 2025 a aussi réuni un line-up exceptionnel d'intervenants :</p>
+          <div class="people-wrap">
+            <span class="ptag"><i class="bi bi-person-fill"></i> Marc Alain Boucicault</span>
+            <span class="ptag"><i class="bi bi-person-fill"></i> Xavier Michon · PNUD</span>
+            <span class="ptag"><i class="bi bi-person-fill"></i> Corinne Cathala · BID</span>
+            <span class="ptag"><i class="bi bi-person-fill"></i> Alfred Metellus · MEF</span>
+            <span class="ptag"><i class="bi bi-person-fill"></i> Patrick Attié · ESIH</span>
+            <span class="ptag"><i class="bi bi-person-fill"></i> Allen Bayard · Access Haiti</span>
+            <span class="ptag"><i class="bi bi-person-fill"></i> Didier Ganthier</span>
+            <span class="ptag"><i class="bi bi-person-fill"></i> Rémy Certil</span>
+            <span class="ptag" style="color:var(--blue); border-color:rgba(0,99,198,.2);"><i class="bi bi-plus-circle"></i> et bien d'autres</span>
+          </div>
+        </div>
+
+        <div class="sb-visual reveal from-left">
+          <div class="visual-wrap">
+            <div class="photo-slot ratio-4-3">
+              <div class="ps-icon"><i class="bi bi-camera"></i></div>
+              <div class="ps-label">Photo — Stand HubConnect HT</div>
+              <div class="ps-hint">Expo 2025 · votre équipe<br><code>photos/hubconnect-expo.jpg</code></div>
+            </div>
+            <p class="photo-caption">HubConnect HT parmi les exposants · DevExpo 2025</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CHAPITRE 3 ── -->
+  <div class="container">
+    <div class="chapter-divider reveal">
+      <div class="ch-line"></div>
+      <div class="ch-label">
+        <div class="ch-dot" style="background:var(--default);"></div>
+        Chapitre 3 · Les leçons
+      </div>
+      <div class="ch-line"></div>
+    </div>
+  </div>
+
+</div><!-- /story -->
+
+
+<!-- ══════════════════════════════════
+     LEÇONS
+══════════════════════════════════ -->
+<section id="lessons" style="padding: 16px 0 80px;">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <h2 style="font-size:clamp(1.6rem,3vw,2.2rem);">Ce que DevExpo m'a vraiment appris</h2>
+      <p style="max-width:520px; margin:0 auto;">Deux ans, deux rôles, deux perspectives. Voici ce que je retiens.</p>
+    </div>
+
+    <div class="row g-3">
+      <div class="col-md-6 reveal" style="transition-delay:.0s">
+        <div class="lesson-card lc-blue">
+          <div class="lc-num">01</div>
+          <div class="lc-icon"><i class="bi bi-lightbulb-fill"></i></div>
+          <h4>L'idée doit résoudre un vrai problème</h4>
+          <p>Ce n'est qu'en répondant à des besoins concrets qu'on crée de la valeur durable. JwennJob existe parce qu'une douleur réelle existait.</p>
+        </div>
+      </div>
+      <div class="col-md-6 reveal" style="transition-delay:.1s">
+        <div class="lesson-card lc-gold">
+          <div class="lc-num">02</div>
+          <div class="lc-icon"><i class="bi bi-graph-up-arrow"></i></div>
+          <h4>Un modèle d'affaires solide est non-négociable</h4>
+          <p>Sans stratégie économique claire, même la meilleure idée peut échouer. Produit et business model évoluent ensemble.</p>
+        </div>
+      </div>
+      <div class="col-md-6 reveal" style="transition-delay:.15s">
+        <div class="lesson-card lc-teal">
+          <div class="lc-num">03</div>
+          <div class="lc-icon"><i class="bi bi-people-fill"></i></div>
+          <h4>L'écosystème vous transforme</h4>
+          <p>Côtoyer Didier Ganthier, Rémy Certil, recevoir des retours de Marc Alain Boucicault — ces interactions valent plus que n'importe quelle formation.</p>
+        </div>
+      </div>
+      <div class="col-md-6 reveal" style="transition-delay:.2s">
+        <div class="lesson-card lc-slate">
+          <div class="lc-num">04</div>
+          <div class="lc-icon"><i class="bi bi-arrow-repeat"></i></div>
+          <h4>Le classement est secondaire</h4>
+          <p>3ème ou 1er — ce qui reste, c'est le partenaire capté, les connexions faites, la confiance gagnée. La suite appartient à ceux qui n'arrêtent pas.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="tags-row reveal">
+      <span class="htag">#JwennJob</span>
+      <span class="htag">#DevExpo2024</span>
+      <span class="htag">#DevExpo2025</span>
+      <span class="htag">#Innovation</span>
+      <span class="htag">#HaitiTech</span>
+      <span class="htag">#Leadership</span>
+      <span class="htag">#HubConnectHT</span>
+      <span class="htag">#SoftwareEngineer</span>
+      <span class="htag">#BrumaireWilliamBoamson</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     CTA
+══════════════════════════════════ -->
+<section id="cta" class="cta-section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+
+      <div class="col-lg-6 reveal from-left">
+        <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(197,159,36,.15); border:1px solid rgba(197,159,36,.25); color:var(--gold); padding:5px 16px; border-radius:30px; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:20px;">
+          <i class="bi bi-terminal-fill"></i> Appel aux développeurs
+        </div>
+        <h2>Toi aussi,<br><span>lance-toi.</span></h2>
+        <p style="color:rgba(255,255,255,.72); margin-bottom:28px; font-size:1rem;">Tu n'as pas besoin d'être prêt à 100%. DevExpo est exactement l'endroit pour tester ton idée, rencontrer des mentors et <strong style="color:#fff;">apprendre en faisant</strong>.</p>
+        <div style="background:rgba(197,159,36,.12); border:1px solid rgba(197,159,36,.22); border-radius:10px; padding:14px 18px; font-size:.88rem; color:rgba(255,255,255,.75); font-style:italic; margin-bottom:28px;">
+          « Je ressors encore plus motivé à contribuer à l'écosystème tech haïtien. Ce n'est que le début. Continuons à bâtir. »
+        </div>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="https://banj.ht" target="_blank" class="btn-blue" style="background:var(--gold); border-color:var(--gold);">
+            <i class="bi bi-arrow-right-circle-fill"></i> Participer à DevExpo
+          </a>
+          <a href="https://www.hubconnectht.com" target="_blank" class="btn-ghost" style="border-color:rgba(255,255,255,.2); color:rgba(255,255,255,.7);">
+            <i class="bi bi-globe2"></i> HubConnect HT
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-6 reveal from-right" style="transition-delay:.1s">
+        <div class="req-block">
+          <div style="font-size:11px; font-weight:700; color:rgba(255,255,255,.35); letter-spacing:2px; text-transform:uppercase; margin-bottom:20px;">Ce qu'il faut</div>
+          <div class="req-item">
+            <div class="req-num gold">1</div>
+            <div>
+              <h5>Une idée</h5>
+              <p>Elle doit résoudre un problème réel. Pas besoin qu'elle soit parfaite — DevExpo est là pour l'affiner avec des retours concrets.</p>
+            </div>
+          </div>
+          <div class="req-item">
+            <div class="req-num dim">2</div>
+            <div>
+              <h5>3 participants minimum</h5>
+              <p>Guillaume, Wood Smith et moi — on est partis avec ça. Une équipe de 3, c'est suffisant pour aller loin.</p>
+            </div>
+          </div>
+          <div class="req-item">
+            <div class="req-num dimmer">3</div>
+            <div>
+              <h5>La volonté d'apprendre</h5>
+              <p>Des mentors, des investisseurs, des retours honnêtes. Viens prêt à absorber — c'est ce qui vous transforme vraiment.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     FOOTER
+══════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="ft-inner">
+      <div class="ft-copy">© 2025 William Boamson Brumaire · Port-au-Prince, Haïti</div>
+      <div class="ft-links">
+        <a href="https://www.hubconnectht.com" target="_blank">HubConnect HT</a>
+        <a href="#">JwennJob</a>
+        <a href="#">ChevalyeTèk</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  /* ── Header scroll shadow ── */
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  /* ── Mobile nav toggle ── */
+  document.getElementById('nav-toggle').addEventListener('click', () => {
+    document.getElementById('nav-links').classList.toggle('open');
+  });
+
+  /* ── Scroll Reveal ── */
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealEls.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
